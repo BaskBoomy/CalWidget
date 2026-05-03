@@ -5,5 +5,6 @@ import SwiftUI
 struct CalWidgetBundle: WidgetBundle {
     var body: some Widget {
         MonthWidget()
+        NextEventWidget()
     }
 }
