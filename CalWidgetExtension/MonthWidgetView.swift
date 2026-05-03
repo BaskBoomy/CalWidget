@@ -3,6 +3,7 @@ import WidgetKit
 
 struct DayCell {
     let day: Int?
+    let date: Date?
     let isToday: Bool
     let inCurrentMonth: Bool
     let events: [EventInfo]
@@ -12,12 +13,10 @@ struct MonthWidgetView: View {
     let entry: MonthEntry
 
     var body: some View {
-        Link(destination: URL(string: "googlecalendar://")!) {
-            if entry.permissionGranted {
-                content
-            } else {
-                permissionPrompt
-            }
+        if entry.permissionGranted {
+            content
+        } else {
+            permissionPrompt
         }
     }
 
@@ -119,13 +118,16 @@ struct MonthWidgetView: View {
         let todayDay = cal.component(.day, from: today)
 
         var cells: [DayCell] = Array(
-            repeating: DayCell(day: nil, isToday: false, inCurrentMonth: false, events: []),
+            repeating: DayCell(day: nil, date: nil, isToday: false, inCurrentMonth: false, events: []),
             count: leading
         )
 
         for d in range {
+            var comps = cal.dateComponents([.year, .month], from: monthStart)
+            comps.day = d
             cells.append(DayCell(
                 day: d,
+                date: cal.date(from: comps),
                 isToday: isCurrentMonth && d == todayDay,
                 inCurrentMonth: true,
                 events: entry.eventsByDay[d] ?? []
@@ -133,7 +135,7 @@ struct MonthWidgetView: View {
         }
 
         while cells.count % 7 != 0 {
-            cells.append(DayCell(day: nil, isToday: false, inCurrentMonth: false, events: []))
+            cells.append(DayCell(day: nil, date: nil, isToday: false, inCurrentMonth: false, events: []))
         }
 
         return stride(from: 0, to: cells.count, by: 7).map {
@@ -146,6 +148,16 @@ struct DayCellView: View {
     let cell: DayCell
 
     var body: some View {
+        if let date = cell.date {
+            Link(destination: Self.googleCalendarURL(for: date)) {
+                cellBody
+            }
+        } else {
+            cellBody
+        }
+    }
+
+    private var cellBody: some View {
         VStack(alignment: .leading, spacing: 1) {
             dayNumber
             ForEach(Array(cell.events.prefix(2).enumerated()), id: \.offset) { _, ev in
@@ -160,8 +172,18 @@ struct DayCellView: View {
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .contentShape(Rectangle())
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityDescription)
+    }
+
+    private static func googleCalendarURL(for date: Date) -> URL {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = TimeZone(identifier: "UTC")
+        f.dateFormat = "yyyyMMdd"
+        let yyyymmdd = f.string(from: date)
+        return URL(string: "googlecalendar://?action=showRange&start=\(yyyymmdd)&end=\(yyyymmdd)")!
     }
 
     @ViewBuilder
