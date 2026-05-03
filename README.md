@@ -78,20 +78,27 @@ CalWidget/
 └── README.md
 ```
 
+## 위젯 종류
+
+| 위젯 | 사이즈 | 내용 |
+|---|---|---|
+| **월간 캘린더** | Large | 한 달 grid + 셀당 일정 2개 |
+| **일정 목록** | Medium / Large | 다가오는 5일 agenda |
+| **다음 일정** | Lock screen (rectangular / circular / inline) | 가장 가까운 일정 |
+
 ## 동작 디테일
 
 - **데이터 로드**: 30분마다 timeline reload + 메인 앱 실행 중 EKEventStoreChanged 감지 시 즉시 reload
-- **셀 탭**: 해당 날짜로 Google 캘린더 앱 열림 (`googlecalendar://?action=showRange&start=YYYYMMDD`)
-- **종일 일정**: 풀 너비 색 bar + 흰 텍스트
-- **시간 일정**: 색상 dot + 본문 텍스트, 셀당 최대 2개 + 초과 시 `+N`
-- **색상**: 캘린더별 색상 자동 반영
+- **셀/행 탭**: 해당 날짜로 Google 캘린더 앱 열림 (`googlecalendar://?action=showRange&start=YYYYMMDD`)
+- **종일 일정**: 풀 너비 색 bar + 자동 대비 계산된 텍스트 색 (밝은 배경엔 검정, 어두운 배경엔 흰색)
+- **시간 일정**: 색상 dot + 시간 + 제목
 - **오늘**: 빨간 원 highlight
 - **주말**: 일요일 빨강 / 토요일 파랑
 - **VoiceOver**: 각 날짜 셀에 일정 정보 음성 안내
 
 ## 위젯 커스터마이징
 
-위젯 길게 눌러 **Edit Widget** 을 탭하면 표시할 캘린더를 선택할 수 있음. 비워두면 모든 캘린더가 표시됨.
+위젯 길게 눌러 **Edit Widget** 을 탭하면 표시할 캘린더를 선택할 수 있음. 비워두면 모든 캘린더가 표시됨. 모든 위젯이 같은 필터를 공유.
 
 ## 무료 계정 한계
 
