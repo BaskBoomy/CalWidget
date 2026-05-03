@@ -12,14 +12,13 @@ struct MonthWidgetView: View {
     let entry: MonthEntry
 
     var body: some View {
-        Group {
+        Link(destination: URL(string: "googlecalendar://")!) {
             if entry.permissionGranted {
                 content
             } else {
                 permissionPrompt
             }
         }
-        .widgetURL(URL(string: "googlecalendar://"))
     }
 
     private var content: some View {
