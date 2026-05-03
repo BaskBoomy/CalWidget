@@ -19,7 +19,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>
-	<string>위젯에 일정을 표시하기 위해 캘린더 접근 권한이 필요합니다.</string>
+	<string>위젯에 일정을 표시하기 위해 캘린더 접근이 필요합니다. 일정 데이터는 기기 외부로 전송되지 않습니다.</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>

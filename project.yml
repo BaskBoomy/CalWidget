@@ -25,7 +25,8 @@ targets:
         UILaunchScreen:
           UIColorName: ""
         CFBundleDisplayName: CalWidget
-        NSCalendarsFullAccessUsageDescription: "월간 위젯에 일정을 표시하기 위해 캘린더 접근 권한이 필요합니다."
+        NSCalendarsFullAccessUsageDescription: "CalWidget은 홈 화면 위젯과 앱 화면에 일정을 표시하기 위해 캘린더 접근이 필요합니다. 일정 데이터는 기기 외부로 전송되지 않습니다."
+        ITSAppUsesNonExemptEncryption: false
     settings:
       base:
         TARGETED_DEVICE_FAMILY: "1"
@@ -43,7 +44,7 @@ targets:
     info:
       path: CalWidgetExtension/Info.plist
       properties:
-        NSCalendarsFullAccessUsageDescription: "위젯에 일정을 표시하기 위해 캘린더 접근 권한이 필요합니다."
+        NSCalendarsFullAccessUsageDescription: "위젯에 일정을 표시하기 위해 캘린더 접근이 필요합니다. 일정 데이터는 기기 외부로 전송되지 않습니다."
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     settings:
