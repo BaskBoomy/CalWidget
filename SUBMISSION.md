@@ -14,27 +14,7 @@
 4. 결제 + 신원 확인 (운전면허증/여권 사진)
 5. **승인까지 보통 24–48시간 소요**
 
-### ☐ 2. macOS 업그레이드
-
-현재 Sonoma 14.x — Xcode 26 은 **Sequoia 15.6 이상** 필요.
-
-- 시스템 설정 → 일반 → 소프트웨어 업데이트
-- macOS Sequoia 또는 Tahoe 로 업그레이드 (1–2시간)
-
-### ☐ 3. Xcode 26 설치
-
-업그레이드 후:
-- App Store 에서 Xcode 검색 → 업데이트 (또는 신규 설치)
-- 설치 후 한 번 실행, 추가 컴포넌트 설치
-- 터미널에서:
-  ```sh
-  sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-  sudo xcodebuild -license accept
-  xcodebuild -runFirstLaunch
-  xcodebuild -downloadPlatform iOS
-  ```
-
-> 2026년 4월 28일부터 App Store 제출은 **iOS 26 SDK 빌드 필수**. Xcode 16 으로는 제출 불가.
+> Macbook 환경 (macOS Tahoe 26.4.1 + Xcode 26) 은 이미 App Store 제출 요건을 만족하므로 OS/Xcode 업그레이드는 불필요.
 
 ---
 
