@@ -80,11 +80,18 @@ CalWidget/
 
 ## 동작 디테일
 
-- **데이터 로드**: 매일 자정에 timeline reload, 권한 요청 직후에도 reload
-- **표시**: 셀당 최대 일정 2개 텍스트 + 초과 시 `+N` 카운트
-- **색상**: 캘린더별 색상을 chip 배경에 25% 투명도로 적용
+- **데이터 로드**: 30분마다 timeline reload + 메인 앱 실행 중 EKEventStoreChanged 감지 시 즉시 reload
+- **셀 탭**: 해당 날짜로 Google 캘린더 앱 열림 (`googlecalendar://?action=showRange&start=YYYYMMDD`)
+- **종일 일정**: 풀 너비 색 bar + 흰 텍스트
+- **시간 일정**: 색상 dot + 본문 텍스트, 셀당 최대 2개 + 초과 시 `+N`
+- **색상**: 캘린더별 색상 자동 반영
 - **오늘**: 빨간 원 highlight
 - **주말**: 일요일 빨강 / 토요일 파랑
+- **VoiceOver**: 각 날짜 셀에 일정 정보 음성 안내
+
+## 위젯 커스터마이징
+
+위젯 길게 눌러 **Edit Widget** 을 탭하면 표시할 캘린더를 선택할 수 있음. 비워두면 모든 캘린더가 표시됨.
 
 ## 무료 계정 한계
 
