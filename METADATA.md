@@ -186,7 +186,7 @@ To test:
 2. Open CalWidget → grant calendar access
 3. Add the CalWidget Large widget to home screen — month grid appears
 
-Privacy policy: https://baskboomy.github.io/CalWidget/PRIVACY
+Privacy policy: https://baskboomy.github.io/CalWidget/PRIVACY.html
 ```
 
 ### Demo Account

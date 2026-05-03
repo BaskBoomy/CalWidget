@@ -68,7 +68,7 @@ App Store 는 **공개 URL** 의 개인정보 처리방침이 필수입니다. G
 2. **Source**: Deploy from a branch
 3. **Branch**: `main` / `root`
 4. **Save**
-5. 1–2분 후 https://baskboomy.github.io/CalWidget/PRIVACY 에서 확인 가능
+5. 1–2분 후 https://baskboomy.github.io/CalWidget/PRIVACY.html 에서 확인 가능
 
 이 URL 을 App Store Connect 의 **App Information → Privacy Policy URL** 에 입력.
 
@@ -76,7 +76,7 @@ App Store 는 **공개 URL** 의 개인정보 처리방침이 필수입니다. G
 
 App Store Connect → 본인 앱 → **App Information**:
 
-- **Privacy Policy URL**: https://baskboomy.github.io/CalWidget/PRIVACY
+- **Privacy Policy URL**: https://baskboomy.github.io/CalWidget/PRIVACY.html
 - **Subtitle**: `월간 캘린더 위젯` (최대 30자)
 - **Category**:
   - Primary: **Productivity**
