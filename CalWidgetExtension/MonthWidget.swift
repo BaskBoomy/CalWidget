@@ -16,6 +16,10 @@ struct EventInfo: Hashable {
     var color: Color {
         Color(red: red, green: green, blue: blue)
     }
+
+    var textColor: Color {
+        contrastingTextColor(red: red, green: green, blue: blue)
+    }
 }
 
 struct MonthEntry: TimelineEntry {

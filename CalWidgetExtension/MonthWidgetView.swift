@@ -212,7 +212,7 @@ struct DayCellView: View {
                 .padding(.vertical, 1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(ev.color)
-                .foregroundStyle(.white)
+                .foregroundStyle(ev.textColor)
                 .clipShape(RoundedRectangle(cornerRadius: 2))
         } else {
             HStack(spacing: 2) {

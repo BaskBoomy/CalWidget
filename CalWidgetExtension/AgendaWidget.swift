@@ -19,6 +19,10 @@ struct AgendaEvent: Hashable {
     var color: Color {
         Color(red: red, green: green, blue: blue)
     }
+
+    var textColor: Color {
+        contrastingTextColor(red: red, green: green, blue: blue)
+    }
 }
 
 struct DayAgenda: Hashable {
@@ -269,7 +273,7 @@ private struct AgendaRow: View {
                 .padding(.horizontal, 5)
                 .padding(.vertical, 1)
                 .background(ev.color)
-                .foregroundStyle(.white)
+                .foregroundStyle(ev.textColor)
                 .clipShape(Capsule())
         } else {
             HStack(spacing: 3) {
