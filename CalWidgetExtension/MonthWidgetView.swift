@@ -160,6 +160,8 @@ struct DayCellView: View {
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityDescription)
     }
 
     @ViewBuilder
@@ -177,16 +179,46 @@ struct DayCellView: View {
         }
     }
 
+    @ViewBuilder
     private func eventChip(_ ev: EventInfo) -> some View {
-        Text(ev.title)
-            .font(.system(size: 7, weight: .medium))
-            .lineLimit(1)
-            .truncationMode(.tail)
+        if ev.isAllDay {
+            Text(ev.title)
+                .font(.system(size: 7, weight: .semibold))
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .padding(.horizontal, 3)
+                .padding(.vertical, 1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(ev.color)
+                .foregroundStyle(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 2))
+        } else {
+            HStack(spacing: 2) {
+                Circle()
+                    .fill(ev.color)
+                    .frame(width: 4, height: 4)
+                Text(ev.title)
+                    .font(.system(size: 7, weight: .medium))
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .foregroundStyle(.primary)
+            }
             .padding(.horizontal, 2)
-            .padding(.vertical, 0.5)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(ev.color.opacity(0.25))
-            .foregroundStyle(.primary)
-            .clipShape(RoundedRectangle(cornerRadius: 2))
+        }
+    }
+
+    private var accessibilityDescription: String {
+        guard let d = cell.day else { return "" }
+        var parts: [String] = ["\(d)일"]
+        if cell.isToday { parts.append("오늘") }
+        if cell.events.isEmpty {
+            parts.append("일정 없음")
+        } else {
+            parts.append("일정 \(cell.events.count)개")
+            let titles = cell.events.map(\.title).joined(separator: ", ")
+            parts.append(titles)
+        }
+        return parts.joined(separator: ", ")
     }
 }
