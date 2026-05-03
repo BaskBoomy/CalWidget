@@ -18,7 +18,19 @@ struct CalWidgetApp: App {
                 .onOpenURL { url in
                     appLogger.info("App.onOpenURL received: \(url.absoluteString, privacy: .public)")
                     diag.record(url: url)
+                    redispatchIfExternal(url)
                 }
+        }
+    }
+
+    private func redispatchIfExternal(_ url: URL) {
+        let externalSchemes: Set<String> = ["googlecalendar", "comgooglecalendar", "x-google-calendar"]
+        guard let scheme = url.scheme?.lowercased(), externalSchemes.contains(scheme) else { return }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            UIApplication.shared.open(url, options: [:]) { ok in
+                appLogger.info("Redispatch \(url.absoluteString, privacy: .public) → success=\(ok)")
+            }
         }
     }
 }
