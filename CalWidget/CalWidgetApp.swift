@@ -7,9 +7,12 @@ private let externalSchemes: Set<String> = ["googlecalendar", "comgooglecalendar
 
 @main
 struct CalWidgetApp: App {
+    @StateObject private var calendarObserver = CalendarChangeObserver()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(calendarObserver)
                 .onOpenURL { url in
                     redispatchIfExternal(url)
                 }

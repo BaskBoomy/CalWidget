@@ -42,9 +42,9 @@ struct MonthProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<MonthEntry>) -> Void) {
         let entry = buildEntry()
-        let nextMidnight = Calendar.current.startOfDay(for: Date().addingTimeInterval(60 * 60 * 24))
-        logger.info("getTimeline: granted=\(entry.permissionGranted), days=\(entry.eventsByDay.count), nextReload=\(nextMidnight, privacy: .public)")
-        completion(Timeline(entries: [entry], policy: .after(nextMidnight)))
+        let nextReload = Date().addingTimeInterval(30 * 60)
+        logger.info("getTimeline: granted=\(entry.permissionGranted), days=\(entry.eventsByDay.count), nextReload=\(nextReload, privacy: .public)")
+        completion(Timeline(entries: [entry], policy: .after(nextReload)))
     }
 
     private func buildEntry() -> MonthEntry {
