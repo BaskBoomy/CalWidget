@@ -26,6 +26,10 @@ targets:
           UIColorName: ""
         CFBundleDisplayName: CalWidget
         NSCalendarsFullAccessUsageDescription: "월간 위젯에 일정을 표시하기 위해 캘린더 접근 권한이 필요합니다."
+        LSApplicationQueriesSchemes:
+          - googlecalendar
+          - comgooglecalendar
+          - x-google-calendar
     settings:
       base:
         TARGETED_DEVICE_FAMILY: "1"

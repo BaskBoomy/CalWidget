@@ -1,6 +1,9 @@
 import WidgetKit
 import SwiftUI
 import EventKit
+import OSLog
+
+private let logger = Logger(subsystem: "com.jack.calwidget.widget", category: "MonthWidget")
 
 struct EventInfo: Hashable {
     let title: String
@@ -40,6 +43,7 @@ struct MonthProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<MonthEntry>) -> Void) {
         let entry = buildEntry()
         let nextMidnight = Calendar.current.startOfDay(for: Date().addingTimeInterval(60 * 60 * 24))
+        logger.info("getTimeline: granted=\(entry.permissionGranted), days=\(entry.eventsByDay.count), nextReload=\(nextMidnight, privacy: .public)")
         completion(Timeline(entries: [entry], policy: .after(nextMidnight)))
     }
 

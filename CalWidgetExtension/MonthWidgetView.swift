@@ -1,5 +1,9 @@
 import SwiftUI
 import WidgetKit
+import OSLog
+
+private let viewLogger = Logger(subsystem: "com.jack.calwidget.widget", category: "MonthWidgetView")
+private let calendarURLString = "googlecalendar://"
 
 struct DayCell {
     let day: Int?
@@ -12,7 +16,9 @@ struct MonthWidgetView: View {
     let entry: MonthEntry
 
     var body: some View {
-        Link(destination: URL(string: "googlecalendar://")!) {
+        let url = URL(string: calendarURLString)!
+        let _ = viewLogger.info("Body build: url=\(calendarURLString, privacy: .public), granted=\(entry.permissionGranted)")
+        return Link(destination: url) {
             if entry.permissionGranted {
                 content
             } else {
