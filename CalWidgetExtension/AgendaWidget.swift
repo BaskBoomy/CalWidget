@@ -162,7 +162,7 @@ struct AgendaWidget: Widget {
                 .containerBackground(.background, for: .widget)
         }
         .configurationDisplayName("일정 목록")
-        .description("앞으로 \(agendaDayCount)일의 일정을 시간순으로 보여줍니다.")
+        .description("앞으로 5일의 일정을 시간순으로 보여줍니다.")
         .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
