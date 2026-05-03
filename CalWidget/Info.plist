@@ -20,12 +20,6 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>googlecalendar</string>
-		<string>comgooglecalendar</string>
-		<string>x-google-calendar</string>
-	</array>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>월간 위젯에 일정을 표시하기 위해 캘린더 접근 권한이 필요합니다.</string>
 	<key>UILaunchScreen</key>
