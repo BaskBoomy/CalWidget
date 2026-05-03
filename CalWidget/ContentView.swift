@@ -4,6 +4,7 @@ import WidgetKit
 
 struct ContentView: View {
     @Environment(\.openURL) private var openURL
+    @StateObject private var todayEvents = TodayEvents()
     @State private var status: EKAuthorizationStatus = EKEventStore.authorizationStatus(for: .event)
     @State private var didRefresh = false
 
@@ -15,6 +16,7 @@ struct ContentView: View {
             List {
                 heroSection
                 quickActionsSection
+                upcomingEventsSection
                 permissionSection
                 googleAccountSection
                 widgetGuideSection
@@ -27,6 +29,7 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 status = EKEventStore.authorizationStatus(for: .event)
+                todayEvents.reload()
             }
         }
     }
@@ -91,6 +94,46 @@ struct ContentView: View {
             }
             .buttonStyle(.plain)
             .disabled(didRefresh)
+        }
+    }
+
+    @ViewBuilder
+    private var upcomingEventsSection: some View {
+        if status == .fullAccess || status == .authorized {
+            Section {
+                if todayEvents.events.isEmpty {
+                    HStack {
+                        Spacer()
+                        VStack(spacing: 6) {
+                            Image(systemName: "calendar.badge.checkmark")
+                                .font(.title2)
+                                .foregroundStyle(.secondary)
+                            Text("앞으로 7일 동안 일정이 없습니다")
+                                .font(.callout)
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding(.vertical, 12)
+                        Spacer()
+                    }
+                } else {
+                    ForEach(todayEvents.events) { event in
+                        EventListRow(event: event)
+                    }
+                }
+            } header: {
+                HStack {
+                    Text("다가오는 일정")
+                    Spacer()
+                    if !todayEvents.events.isEmpty {
+                        Text("\(todayEvents.events.count)건")
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            } footer: {
+                if !todayEvents.events.isEmpty {
+                    Text("앞으로 7일 일정 (최대 15건)")
+                }
+            }
         }
     }
 
@@ -254,6 +297,7 @@ struct ContentView: View {
         await MainActor.run {
             status = EKEventStore.authorizationStatus(for: .event)
             WidgetCenter.shared.reloadAllTimelines()
+            todayEvents.reload()
         }
     }
 }
